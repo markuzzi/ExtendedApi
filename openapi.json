@@ -1,0 +1,1150 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "osTicket API",
+        "version": "1.0.0",
+        "description": "API for managing tickets and users from osTicket"
+    },
+    "components": {
+        "schemas": {
+            "CreateTicketPayload": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "subject": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "notes": {
+                        "type": "string"
+                    },
+                    "test_field": {
+                        "type": "string"
+                    },
+                    "opc": {
+                        "type": "integer"
+                    },
+                    "alert": {
+                        "type": "boolean"
+                    },
+                    "autorespond": {
+                        "type": "boolean"
+                    },
+                    "ip": {
+                        "type": "string"
+                    },
+                    "priority": {
+                        "type": "integer"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "topicId": {
+                        "type": "integer"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "example": {
+                    "email": "feedback@osticket.com",
+                    "name": "Angry User",
+                    "phone": "3185558634X123",
+                    "subject": "Testing API",
+                    "message": "data:text/html,MESSAGE <b>HERE</b>",
+                    "notes": "data:text/html,<p>internal message...</p>",
+                    "test_field": "ABCDE",
+                    "opc": 1,
+                    "alert": true,
+                    "autorespond": true,
+                    "ip": "::1",
+                    "priority": 3,
+                    "source": "API",
+                    "topicId": 11,
+                    "attachments": []
+                }
+            },
+            "UpdateTicketPayload": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "subject": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "priority": {
+                        "type": "integer"
+                    },
+                    "_dis_note": {
+                        "type": "string"
+                    },
+                    "opc": {
+                        "type": "boolean"
+                    },
+                    "test_field": {
+                        "type": "string"
+                    },
+                    "alert": {
+                        "type": "boolean"
+                    },
+                    "autorespond": {
+                        "type": "boolean"
+                    },
+                    "ip": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "topicId": {
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "email": "feedback@osticket.com",
+                    "name": "Angry User",
+                    "phone": "3185558634X123",
+                    "subject": "Testing API 123",
+                    "message": "data:text/html,<p>internal message...</p>",
+                    "priority": 1,
+                    "_dis_note": "data:text/html,<p>internal message...</p>",
+                    "opc": false,
+                    "test_field": "Neuer Test123",
+                    "alert": true,
+                    "autorespond": true,
+                    "ip": "::1",
+                    "source": "API",
+                    "topicId": 11,
+                    "status": 2
+                }
+            },
+            "CreateNotePayload": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "title": "Test Note",
+                    "response": "<p>new message...</p>"
+                }
+            },
+            "CreateInternalNotePayload": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "note": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "title": "Test Note",
+                    "note": "<p>new message...</p>"
+                }
+            },
+            "TicketIdResponse": {
+                "type": "integer",
+                "example": 24
+            },
+            "NoteIdResponse": {
+                "type": "integer",
+                "example": 25
+            },
+            "InternalNoteIdResponse": {
+                "type": "integer",
+                "example": 26
+            },
+            "UpdateTicketResponse": {
+                "type": "boolean",
+                "example": true
+            },
+            "Ticket": {
+                "type": "object",
+                "properties": {
+                    "ticket_id": {
+                        "type": "integer"
+                    },
+                    "number": {
+                        "type": "string"
+                    },
+                    "cdata__subject": {
+                        "type": "string"
+                    },
+                    "staff_id": {
+                        "type": "integer"
+                    },
+                    "staff__firstname": {
+                        "type": "string"
+                    },
+                    "staff__lastname": {
+                        "type": "string"
+                    },
+                    "team__name": {
+                        "type": "string"
+                    },
+                    "team_id": {
+                        "type": "integer"
+                    },
+                    "lock__lock_id": {
+                        "type": "integer"
+                    },
+                    "lock__staff_id": {
+                        "type": "integer"
+                    },
+                    "isoverdue": {
+                        "type": "integer"
+                    },
+                    "status_id": {
+                        "type": "integer"
+                    },
+                    "status__name": {
+                        "type": "string"
+                    },
+                    "status__state": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "dept_id": {
+                        "type": "integer"
+                    },
+                    "dept__name": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "user__default_email__address": {
+                        "type": "string"
+                    },
+                    "user__name": {
+                        "type": "string"
+                    },
+                    "lastupdate": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "example": {
+                    "ticket_id": 23,
+                    "number": "150296",
+                    "cdata__subject": "Testing API 123",
+                    "staff_id": 0,
+                    "staff__firstname": null,
+                    "staff__lastname": null,
+                    "team__name": null,
+                    "team_id": 0,
+                    "lock__lock_id": null,
+                    "lock__staff_id": null,
+                    "isoverdue": 0,
+                    "status_id": 1,
+                    "status__name": "Open",
+                    "status__state": "open",
+                    "source": "API",
+                    "dept_id": 1,
+                    "dept__name": "Support",
+                    "user_id": 1,
+                    "user__default_email__address": "feedback@osticket.com",
+                    "user__name": "osTicket Team",
+                    "lastupdate": "2023-09-17 15:07:17"
+                }
+            },
+            "Note": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "thread_id": {
+                        "type": "integer"
+                    },
+                    "staff_id": {
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "flags": {
+                        "type": "integer"
+                    },
+                    "poster": {
+                        "type": "string"
+                    },
+                    "editor": {
+                        "type": "string"
+                    },
+                    "editor_type": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "format": {
+                        "type": "string"
+                    },
+                    "ip_address": {
+                        "type": "string"
+                    },
+                    "extra": {
+                        "type": "string"
+                    },
+                    "recipients": {
+                        "type": "string"
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "has_attachments": {
+                        "type": "integer"
+                    }
+                },
+                "example": [
+                    {
+                        "id": 25,
+                        "pid": 0,
+                        "thread_id": 23,
+                        "staff_id": 0,
+                        "user_id": 1,
+                        "type": "M",
+                        "flags": 65,
+                        "poster": "osTicket Team",
+                        "editor": null,
+                        "editor_type": null,
+                        "source": "API",
+                        "title": "Testing API",
+                        "body": "MESSAGE <b>HERE</b>",
+                        "format": "html",
+                        "ip_address": "::1",
+                        "extra": null,
+                        "recipients": null,
+                        "created": "2023-09-17 15:01:38",
+                        "updated": "0000-00-00 00:00:00",
+                        "has_attachments": 0
+                    },
+                    {
+                        "id": 26,
+                        "pid": 0,
+                        "thread_id": 23,
+                        "staff_id": 1,
+                        "user_id": 0,
+                        "type": "N",
+                        "flags": 64,
+                        "poster": "Peter Parker",
+                        "editor": null,
+                        "editor_type": null,
+                        "source": "",
+                        "title": "Ticket Updated",
+                        "body": "<p>asdf<\/p>",
+                        "format": "html",
+                        "ip_address": "::1",
+                        "extra": null,
+                        "recipients": null,
+                        "created": "2023-09-17 15:08:26",
+                        "updated": "0000-00-00 00:00:00",
+                        "has_attachments": 0
+                    }
+                ]
+            },
+            "Field": {
+                "type": "object",
+                "properties": {
+                  "field_id": {
+                    "type": "integer",
+                    "description": "The ID of the field"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "The value of the field"
+                  },
+                  "value_id": {
+                    "type": "integer",
+                    "description": "The ID of the field's value (if applicable)"
+                  },
+                  "field__form_id": {
+                    "type": "integer",
+                    "description": "The ID of the form associated with the field"
+                  },
+                  "field__type": {
+                    "type": "string",
+                    "description": "The type of the field (e.g., 'text', 'priority')"
+                  },
+                  "field__label": {
+                    "type": "string",
+                    "description": "The label of the field"
+                  },
+                  "field__name": {
+                    "type": "string",
+                    "description": "The name of the field"
+                  },
+                  "field__configuration": {
+                    "type": "string",
+                    "description": "Configuration settings for the field (if applicable)"
+                  },
+                  "field__sort": {
+                    "type": "integer",
+                    "description": "The sorting order of the field"
+                  },
+                  "field__hint": {
+                    "type": "string",
+                    "description": "A hint or additional information about the field"
+                  }
+                },
+                "example": {
+                  "field_id": 1,
+                  "value": "Example Value",
+                  "value_id": null,
+                  "field__form_id": 2,
+                  "field__type": "text",
+                  "field__label": "Example Field",
+                  "field__name": "example_field",
+                  "field__configuration": "{\"size\": 40, \"length\": 50}",
+                  "field__sort": 1,
+                  "field__hint": "This is a sample field."
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "default_email__address": {
+                        "type": "string"
+                    },
+                    "account__id": {
+                        "type": "integer"
+                    },
+                    "account__status": {
+                        "type": "integer"
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "example": [
+                    {
+                        "id": 4,
+                        "name": "Angry User",
+                        "default_email__address": "api@osticket.com",
+                        "account__id": null,
+                        "account__status": null,
+                        "created": "2023-09-17 14:22:50",
+                        "updated": "2023-09-17 14:22:50"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Max",
+                        "default_email__address": "test2@domain.com",
+                        "account__id": null,
+                        "account__status": null,
+                        "created": "2023-09-10 12:49:22",
+                        "updated": "2023-09-10 12:49:22"
+                    }
+                ]
+            },
+            "CreateUserPayload": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateUserPayload": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreateAccountPayload": {
+                "type": "object",
+                "properties": {}
+            },
+            "UserIdResponse": {
+                "type": "integer"
+            },
+            "AccountIdResponse": {
+                "type": "integer"
+            },
+            "UpdateUserResponse": {
+                "type": "boolean"
+            }
+        }
+    },
+    "paths": {
+        "/tickets": {
+            "get": {
+                "summary": "List all tickets",
+                "responses": {
+                    "200": {
+                        "description": "List of tickets",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Ticket"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "ticket_id": 23,
+                                        "number": "150296",
+                                        "cdata__subject": "Testing API 123",
+                                        "staff_id": 0,
+                                        "staff__firstname": null,
+                                        "staff__lastname": null,
+                                        "team__name": null,
+                                        "team_id": 0,
+                                        "lock__lock_id": null,
+                                        "lock__staff_id": null,
+                                        "isoverdue": 0,
+                                        "status_id": 1,
+                                        "status__name": "Open",
+                                        "status__state": "open",
+                                        "source": "API",
+                                        "dept_id": 1,
+                                        "dept__name": "Support",
+                                        "user_id": 1,
+                                        "user__default_email__address": "feedback@osticket.com",
+                                        "user__name": "osTicket Team",
+                                        "lastupdate": "2023-09-17 15:07:17"
+                                    },
+                                    {
+                                        "ticket_id": 22,
+                                        "number": "414633",
+                                        "cdata__subject": "Testing API 123",
+                                        "staff_id": 1,
+                                        "staff__firstname": "Peter",
+                                        "staff__lastname": "Parker",
+                                        "team__name": null,
+                                        "team_id": 0,
+                                        "lock__lock_id": null,
+                                        "lock__staff_id": null,
+                                        "isoverdue": 0,
+                                        "status_id": 1,
+                                        "status__name": "Open",
+                                        "status__state": "open",
+                                        "source": "API",
+                                        "dept_id": 1,
+                                        "dept__name": "Support",
+                                        "user_id": 1,
+                                        "user__default_email__address": "feedback@osticket.com",
+                                        "user__name": "osTicket Team",
+                                        "lastupdate": "2023-09-17 15:00:14"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new ticket",
+                "requestBody": {
+                    "description": "Payload for creating a ticket",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTicketPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ID of the newly created ticket",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TicketIdResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tickets/{id}": {
+            "get": {
+                "summary": "Get details of a specific ticket",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Ticket ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of the ticket",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticket"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Update a ticket",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Ticket ID"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Payload for updating a ticket",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTicketPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "True if the ticket was updated successfully, false otherwise",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateTicketResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a ticket",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Ticket ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if the ticket was deleted successfully, false otherwise",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tickets/{id}/notes": {
+            "get": {
+                "summary": "Get notes for a specific ticket",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Ticket ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of notes for the ticket",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Note"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 25,
+                                        "pid": 0,
+                                        "thread_id": 23,
+                                        "staff_id": 0,
+                                        "user_id": 1,
+                                        "type": "M",
+                                        "flags": 65,
+                                        "poster": "osTicket Team",
+                                        "editor": null,
+                                        "editor_type": null,
+                                        "source": "API",
+                                        "title": "Testing API",
+                                        "body": "MESSAGE <b>HERE<\/b>",
+                                        "format": "html",
+                                        "ip_address": "::1",
+                                        "extra": null,
+                                        "recipients": null,
+                                        "created": "2023-09-17 15:01:38",
+                                        "updated": "0000-00-00 00:00:00",
+                                        "has_attachments": 0
+                                    },
+                                    {
+                                        "id": 26,
+                                        "pid": 0,
+                                        "thread_id": 23,
+                                        "staff_id": 1,
+                                        "user_id": 0,
+                                        "type": "N",
+                                        "flags": 64,
+                                        "poster": "Peter Parker",
+                                        "editor": null,
+                                        "editor_type": null,
+                                        "source": "",
+                                        "title": "Ticket Updated",
+                                        "body": "<p>asdf<\/p>",
+                                        "format": "html",
+                                        "ip_address": "::1",
+                                        "extra": null,
+                                        "recipients": null,
+                                        "created": "2023-09-17 15:08:26",
+                                        "updated": "0000-00-00 00:00:00",
+                                        "has_attachments": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new note for a specific ticket",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Ticket ID"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Payload for posting a note",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateNotePayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ID of the newly created note",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NoteIdResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tickets/{id}/internal-notes": {
+            "post": {
+                "summary": "Create a new internal note for a specific ticket",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Ticket ID"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Payload for posting an internal note",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateInternalNotePayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ID of the newly created internal note",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InternalNoteIdResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tickets/{id}/fields": {
+            "get": {
+              "summary": "Get custom fields for a specific ticket",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  },
+                  "description": "Ticket ID"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Custom fields for the ticket",
+                  "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Field"
+                            }
+                        },
+                      "example": [
+                        {
+                          "entry_id": 40,
+                          "value": "Testing API 123",
+                          "value_id": null,
+                          "field_id": 20,
+                          "field__form_id": 2,
+                          "field__type": "text",
+                          "field__label": "Issue Summary",
+                          "field__name": "subject",
+                          "field__configuration": "{\"size\":40,\"length\":50}",
+                          "field__sort": 1,
+                          "field__hint": null
+                        },
+                        {
+                          "entry_id": 40,
+                          "value": "Low",
+                          "value_id": 1,
+                          "field_id": 22,
+                          "field__form_id": 2,
+                          "field__type": "priority",
+                          "field__label": "Priority Level",
+                          "field__name": "priority",
+                          "field__configuration": null,
+                          "field__sort": 3,
+                          "field__hint": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+        "/users": {
+            "get": {
+                "summary": "List all users",
+                "responses": {
+                    "200": {
+                        "description": "List of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 4,
+                                        "name": "Angry User",
+                                        "default_email__address": "api@osticket.com",
+                                        "account__id": null,
+                                        "account__status": null,
+                                        "created": "2023-09-17 14:22:50",
+                                        "updated": "2023-09-17 14:22:50"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "name": "Max",
+                                        "default_email__address": "test2@domain.com",
+                                        "account__id": null,
+                                        "account__status": null,
+                                        "created": "2023-09-10 12:49:22",
+                                        "updated": "2023-09-10 12:49:22"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "Peter",
+                                        "default_email__address": "test@domain.com",
+                                        "account__id": null,
+                                        "account__status": null,
+                                        "created": "2023-09-10 12:49:10",
+                                        "updated": "2023-09-10 12:49:10"
+                                    },
+                                    {
+                                        "id": 1,
+                                        "name": "osTicket Team",
+                                        "default_email__address": "feedback@osticket.com",
+                                        "account__id": 1,
+                                        "account__status": 0,
+                                        "created": "2023-09-10 12:14:56",
+                                        "updated": "2023-09-10 12:14:57"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new user",
+                "requestBody": {
+                    "description": "Payload for creating a user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ID of the newly created user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserIdResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "summary": "Get details of a specific user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "User ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of the user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "User ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if the user was deleted successfully, false otherwise",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Update a user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "User ID"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Payload for updating a user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "True if the user was updated successfully, false otherwise",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateUserResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}/account": {
+            "post": {
+                "summary": "Create an account for a user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "User ID"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Payload for creating an account",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAccountPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ID of the newly created account",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccountIdResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "email": "feedback@osticket.com",
+    "name": "Angry User",
+    "phone": "3185558634X123",
+
+    "subject": "Testing API 123",
+    "message": "data:text/html,<p>internal message...</p>",
+    "priority": 1,
+    "_dis_note": "data:text/html,<p>internal message...</p>",
+
+    "opc": false,
+    "test_field": "New Test",
+
+    "alert": true,
+    "autorespond": true,
+    "ip": "::1",
+    "source": "API",
+    "topicId": 11,
+    "status": 2
+}
